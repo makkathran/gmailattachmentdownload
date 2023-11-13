@@ -2,21 +2,17 @@ import imaplib
 import email
 from pathlib import Path
 
-# Gmail login details
 EMAIL = 'your_email_address'
 PASSWORD = 'your_application-specific_password'
 SENDER = 'from_who_email_address'
 
-# Get the downloads folder path
 DOWNLOADS_PATH = Path.home() / "Downloads"
 OUTPUT_DIR = DOWNLOADS_PATH / "downloaded_attachments"
 
-# Connect to the Gmail IMAP server
 mail = imaplib.IMAP4_SSL('imap.gmail.com')
 mail.login(EMAIL, PASSWORD)
 mail.select('inbox')
 
-# Search for all emails from the given sender
 result, data = mail.search(None, f'(FROM "{SENDER}")')
 email_ids = data[0].split()
 
